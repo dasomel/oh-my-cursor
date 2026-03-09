@@ -1,0 +1,54 @@
+---
+description: "Plan-Execute workflow - structured planning before implementation. Use for any task requiring 3+ steps or touching multiple files."
+alwaysApply: false
+---
+
+# Plan-Execute Workflow
+
+## When to Use
+- Task requires 3+ steps
+- Changes touch multiple files
+- Architectural decisions involved
+- User says "plan then do", "plan first"
+
+## Steps
+
+### Step 1: Plan (Planner Role)
+```
+[Switching to Planner role]
+
+1. Read relevant files to understand context
+2. Decompose into atomic steps
+3. Write to .omc-cursor/plans/{task}.md:
+   - Goal
+   - Acceptance criteria
+   - Ordered steps with verification
+   - Files to change
+4. Present plan to user
+5. STOP — await explicit approval
+```
+
+### Step 2: Execute (Executor Role)
+```
+[Awaiting approval...]
+[User approved — Switching to Executor role]
+
+For each step:
+1. Implement change
+2. Run verification (test/build/lint)
+3. Show actual output
+4. Proceed to next step only on success
+```
+
+### Step 3: Verify (Reviewer Role, optional)
+```
+[Switching to Reviewer role]
+Review changes for quality and correctness
+```
+
+## Approval Gate
+
+**NEVER proceed to execution without user approval of the plan.**
+
+If the task is time-sensitive and user says "just do it", skip the approval gate
+but still create the plan file for documentation.

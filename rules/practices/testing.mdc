@@ -1,0 +1,55 @@
+---
+description: "Testing standards and best practices"
+globs: ["**/*.test.ts", "**/*.spec.ts", "**/*.test.js", "**/*.spec.js", "**/*.test.tsx", "**/*.spec.tsx"]
+alwaysApply: false
+---
+
+# Testing Standards
+
+## Coverage Targets
+- Line coverage: **≥ 80%**
+- Branch coverage: **≥ 75%** on critical paths
+- Function coverage: **≥ 90%**
+
+## Test Structure (AAA Pattern)
+```typescript
+it('should return error when input is empty', () => {
+  // Arrange
+  const input = ''
+
+  // Act
+  const result = validateInput(input)
+
+  // Assert
+  expect(result.ok).toBe(false)
+  expect(result.error).toBe('Input cannot be empty')
+})
+```
+
+## Naming
+- Describe behavior, not implementation: `'should return 404 when user not found'`
+- Not: `'test getUserById with invalid id'`
+
+## Test Data
+- Use factories/builders, not hardcoded values
+- Seed random data with `faker` for variety
+- Reset state between tests
+
+## Mocking Rules
+- Mock external dependencies (HTTP, DB, filesystem)
+- Don't mock your own code (that's testing the mock)
+- Verify mock calls when behavior matters, not just return values
+
+## Flaky Test Prevention
+- No `setTimeout` or `sleep` in tests
+- Use `waitFor` with explicit conditions
+- Deterministic test order (each test is independent)
+- No shared mutable state between tests
+
+## Edge Cases Checklist
+- [ ] Empty/null input
+- [ ] Maximum/minimum boundary values
+- [ ] Unicode and special characters
+- [ ] Concurrent operations
+- [ ] Network timeout/error
+- [ ] Permission denied

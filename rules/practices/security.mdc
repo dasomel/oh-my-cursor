@@ -1,0 +1,45 @@
+---
+description: "Security standards - always applied to prevent common vulnerabilities"
+alwaysApply: true
+---
+
+# Security Standards (Always Applied)
+
+## Non-Negotiable Rules
+
+### Secrets
+- **NEVER** hardcode API keys, passwords, tokens, or credentials
+- **NEVER** commit `.env` files with real values
+- Use environment variables or secret managers
+- Rotate any secret accidentally committed
+
+### Input Validation
+- Validate ALL external input at system boundaries
+- Use allowlists over denylists
+- Validate type, format, length, range
+- Reject and log invalid input — never silently ignore
+
+### SQL/Command Injection
+- Use parameterized queries / prepared statements
+- Never concatenate user input into SQL strings
+- Never pass user input to shell commands (`exec`, `spawn`)
+
+### Authentication & Authorization
+- Check authorization on EVERY sensitive operation (don't rely on UI hiding)
+- Use established auth libraries — don't roll your own
+- Session tokens: httpOnly, secure, sameSite cookies
+- Implement rate limiting on auth endpoints
+
+### Data Handling
+- Encrypt PII at rest and in transit
+- Minimize data collection (only what's needed)
+- Log context, not sensitive data (log userId, not password)
+
+### Dependencies
+- Run `npm audit` / `pip audit` / `cargo audit` regularly
+- Fix CRITICAL vulnerabilities immediately
+- Prefer well-maintained packages (recent commits, many maintainers)
+
+## When You See a Violation
+Flag immediately with: `🔴 SECURITY: {description} at {file}:{line}`
+Do not proceed without addressing it.

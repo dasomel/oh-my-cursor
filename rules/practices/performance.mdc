@@ -1,0 +1,41 @@
+---
+description: "Performance optimization standards"
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+alwaysApply: false
+---
+
+# Performance Standards
+
+## Database
+- **N+1 queries**: Always batch-load related records
+- Use database-level pagination (LIMIT/OFFSET or cursor-based)
+- Index foreign keys and frequently-queried columns
+- Avoid `SELECT *` — specify needed columns
+
+## Caching
+- Cache expensive computations (memoization for pure functions)
+- Cache HTTP responses where appropriate (ETags, Cache-Control)
+- Invalidate cache on data mutation
+- Don't cache sensitive or user-specific data globally
+
+## Frontend (React/UI)
+- Avoid unnecessary re-renders (`useMemo`, `useCallback` for stable references)
+- Lazy-load routes and heavy components
+- Virtualize long lists (>100 items)
+- Avoid inline object/function creation in JSX
+
+## Async Operations
+- Run independent async operations in parallel: `await Promise.all([...])`
+- Don't `await` inside loops for independent operations
+- Set timeouts on external calls
+- Handle backpressure in streams
+
+## Bundle Size
+- Check bundle size impact before adding dependencies
+- Tree-shake unused code
+- Use dynamic imports for large libraries used infrequently
+
+## Measurement
+- Measure before optimizing (don't guess)
+- Profile in production conditions (not dev mode)
+- Set performance budgets and enforce in CI

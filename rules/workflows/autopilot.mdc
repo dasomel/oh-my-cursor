@@ -1,0 +1,53 @@
+---
+description: "Autopilot workflow - full autonomous execution from idea to working code. Trigger: 'autopilot', 'build me', 'create me', 'full auto', 'I want a'"
+alwaysApply: false
+---
+
+# Autopilot Workflow
+
+## Trigger Conditions
+Activate when user says: "autopilot", "build me", "create me", "full auto", "autonomous"
+
+## Execution Phases
+
+### Phase 0: Expansion
+[Switching to Analyst role]
+- Extract requirements from user's description
+- Clarify ambiguities (ask ONE question if critical info is missing)
+- Write spec to `.omc-cursor/spec.md`
+
+### Phase 1: Planning
+[Switching to Planner role]
+- Read `.omc-cursor/spec.md`
+- Create implementation plan in `.omc-cursor/plans/impl.md`
+- Include: steps, acceptance criteria, files to change
+
+### Phase 2: Implementation
+[Switching to Executor role]
+- Read plan from `.omc-cursor/plans/impl.md`
+- Implement step by step
+- Verify after each step
+
+### Phase 3: QA Loop (max 5 cycles)
+```
+Run tests → Any failures?
+  YES → [Debugger role] Fix → Repeat
+  NO  → Continue to Phase 4
+```
+After 3 same-error cycles: STOP and report fundamental blocker.
+
+### Phase 4: Self-Review
+[Switching to Reviewer role] — Code quality check
+[Switching to Security Reviewer role] — Vulnerability scan
+Fix any 🔴 CRITICAL findings, then re-verify.
+
+## Completion Criteria
+- All tests pass (show output)
+- Build succeeds (show output)
+- No 🔴 CRITICAL review findings
+- Acceptance criteria in spec all checked off
+
+## State Files
+- `.omc-cursor/spec.md` — Requirements
+- `.omc-cursor/plans/impl.md` — Implementation plan
+- `.omc-cursor/notepad.md` — Session notes

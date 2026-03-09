@@ -1,0 +1,58 @@
+---
+description: "Git workflow and commit message standards"
+globs: [".git/**", "**/.gitignore"]
+alwaysApply: false
+---
+
+# Git Workflow Standards
+
+## Commit Messages (Conventional Commits)
+
+Format: `<type>(<scope>): <description>`
+
+Types:
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation only
+- `refactor`: Code change without feature/fix
+- `test`: Adding/fixing tests
+- `chore`: Build, config, dependencies
+- `perf`: Performance improvement
+
+Examples:
+```
+feat(auth): add OAuth2 Google login
+fix(api): handle null response from user service
+test(parser): add edge cases for empty input
+chore(deps): upgrade typescript to 5.7
+```
+
+Rules:
+- Lowercase, no period at end
+- Max 72 chars in first line
+- Imperative mood: "add" not "added"
+- Reference issues: `fix(auth): handle session expiry (#142)`
+
+## Branch Strategy
+
+```
+main          ← production-ready
+develop       ← integration branch
+feat/name     ← new features
+fix/issue-123 ← bug fixes
+chore/name    ← maintenance
+```
+
+## Pull Request Rules
+
+- One PR per feature/fix
+- Link to issue: `Closes #123`
+- Self-review before requesting review
+- All tests passing before review request
+- No force-push to shared branches
+
+## Anti-Patterns
+- `git commit -m "fix stuff"` — meaningless messages
+- Giant PRs (>500 lines changed)
+- Committing generated files
+- Force-pushing to main/develop

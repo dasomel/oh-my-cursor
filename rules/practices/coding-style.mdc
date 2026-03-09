@@ -1,0 +1,49 @@
+---
+description: "Coding style and quality standards"
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.py", "**/*.go", "**/*.rs"]
+alwaysApply: false
+---
+
+# Coding Style Standards
+
+## Universal Rules
+
+### Naming
+- Variables/functions: descriptive, verb-noun for functions (`getUserById`, not `getUser`)
+- Booleans: `is`, `has`, `can`, `should` prefix (`isLoading`, `hasError`)
+- Constants: `UPPER_SNAKE_CASE`
+- Avoid abbreviations unless universally known (`id`, `url`, `ctx` OK; `usr`, `val` not OK)
+
+### Functions
+- Single responsibility: one function, one job
+- Max 30 lines (if longer, decompose)
+- Max 3 parameters (use object for more)
+- Pure functions preferred (no hidden side effects)
+
+### Files
+- Max 300 lines per file
+- Group related functions together
+- Exports at the bottom or as named exports at declaration
+
+### Error Handling
+- Never swallow errors silently
+- Always log with context: `logger.error('Failed to fetch user', { userId, error })`
+- Use typed error classes for domain errors
+- Return `Result<T, E>` or throw — pick one pattern per module
+
+### Comments
+- No comments explaining WHAT the code does — code should be self-evident
+- Comments explain WHY (business logic, workarounds, constraints)
+- TODO comments must include: `// TODO(author): description — issue #123`
+
+## TypeScript Specific
+- Prefer `interface` for object shapes, `type` for unions/intersections
+- Avoid `any` — use `unknown` and narrow
+- Use strict mode
+- Explicit return types on public functions
+
+## Anti-Patterns
+- God objects/functions (do too much)
+- Deeply nested callbacks (prefer async/await)
+- Mutable default parameters
+- Boolean parameter flags (use separate functions or enums)

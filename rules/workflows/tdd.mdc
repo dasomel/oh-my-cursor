@@ -1,0 +1,60 @@
+---
+description: "TDD workflow - Test-Driven Development cycle. Trigger: 'tdd', 'test first', 'red green refactor', 'test-driven'"
+alwaysApply: false
+---
+
+# TDD Workflow
+
+## Trigger Conditions
+Activate when user says: "tdd", "test first", "red green", "test-driven"
+
+## The Cycle
+
+```
+┌─────────────────────────────────┐
+│           RED PHASE             │
+│  Write a failing test           │
+│  Run test → MUST fail           │
+│  If it passes: test is wrong    │
+└──────────────┬──────────────────┘
+               ↓
+┌─────────────────────────────────┐
+│          GREEN PHASE            │
+│  Write MINIMUM code to pass     │
+│  No extra features              │
+│  Run test → MUST pass           │
+└──────────────┬──────────────────┘
+               ↓
+┌─────────────────────────────────┐
+│        REFACTOR PHASE           │
+│  Improve code quality           │
+│  No behavior changes            │
+│  Run test → MUST still pass     │
+└──────────────┘
+```
+
+## Rules
+
+1. **Never write production code without a failing test first**
+2. **Write only enough test to fail** (one assertion at a time)
+3. **Write only enough code to pass the failing test**
+4. **Refactor only on green** (passing tests)
+5. **One failing test at a time**
+
+## Test Naming Convention
+```
+describe('ComponentName', () => {
+  describe('methodName', () => {
+    it('should {behavior} when {condition}', () => {})
+    it('should throw {error} when {invalid condition}', () => {})
+  })
+})
+```
+
+## Switching to Implementation
+
+After RED phase — announce before writing production code:
+"RED confirmed (test fails). Switching to GREEN phase."
+
+After GREEN phase — announce before refactoring:
+"GREEN confirmed (test passes). Switching to REFACTOR phase."
