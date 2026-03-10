@@ -58,5 +58,8 @@
   "bugs": {
     "url": "https://github.com/dasomel/oh-my-cursor/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
 }

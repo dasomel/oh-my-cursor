@@ -1,5 +1,7 @@
 # oh-my-cursor
 
+**English** | [한국어](./README.ko.md)
+
 Multi-agent orchestration for [Cursor IDE](https://cursor.sh), inspired by [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode).
 
 Cursor doesn't have Claude Code's `Task` sub-agent spawning — so oh-my-cursor brings the same multi-agent *patterns* to Cursor through a curated library of Cursor Rules (`.mdc` files) and a CLI installer.
@@ -14,11 +16,25 @@ Cursor doesn't have Claude Code's `Task` sub-agent spawning — so oh-my-cursor 
 
 ## Quick Start
 
-```bash
-# Install globally
-npm install -g oh-my-cursor
+### Option 1: Shell script (no dependencies)
 
-# Set up your project
+```bash
+cd your-project
+curl -fsSL https://raw.githubusercontent.com/dasomel/oh-my-cursor/main/install.sh | bash
+```
+
+### Option 2: Clone + Make
+
+```bash
+git clone https://github.com/dasomel/oh-my-cursor.git ~/.oh-my-cursor
+cd your-project
+PROJECT=$(pwd) make -f ~/.oh-my-cursor/Makefile install
+```
+
+### Option 3: npm (CLI with add/remove/doctor)
+
+```bash
+npm install -g oh-my-cursor
 cd your-project
 oh-my-cursor install
 ```
@@ -144,8 +160,9 @@ After `oh-my-cursor install`, your project gets:
 
 ## Requirements
 
-- Node.js >= 20.0.0
 - [Cursor IDE](https://cursor.sh)
+- `curl` or `make` (for shell/Makefile install)
+- Node.js >= 20.0.0 (only for npm CLI install)
 
 ## Credits
 
