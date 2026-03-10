@@ -1,0 +1,123 @@
+---
+description: "PRD-driven persistence loop — keep going until all stories pass verification"
+alwaysApply: false
+---
+
+# Ralph Workflow
+
+Ralph is a persistence loop that tracks work via a PRD (Product Requirements Document) and iterates until all stories pass verification.
+
+## Triggers
+- "ralph", "don't stop", "keep going", "must complete", "until done"
+
+## How It Works
+
+```
+1. Create PRD → .omc-cursor/prd.json
+2. For each story:
+   a. Implement (Executor role)
+   b. Verify (Verifier role)
+   c. If FAIL → fix and re-verify
+3. Repeat until ALL stories pass
+4. Final sign-off (Architect role)
+```
+
+## Phase 1: PRD Creation
+
+Create `.omc-cursor/prd.json` with this structure:
+```json
+{
+  "title": "Feature/Task Title",
+  "created": "ISO-8601 timestamp",
+  "stories": [
+    {
+      "id": "S1",
+      "title": "Story title",
+      "acceptance": ["criterion 1", "criterion 2"],
+      "status": "pending",
+      "attempts": 0
+    }
+  ],
+  "status": "in-progress"
+}
+```
+
+## Phase 2: Story Implementation Loop
+
+For each story with status `pending` or `failed`:
+
+### Step 1: Implement (Executor Role)
+```
+Switching to Executor role.
+- Read the story's acceptance criteria
+- Implement the minimum code to satisfy ALL criteria
+- Run relevant tests
+```
+
+### Step 2: Verify (Verifier Role)
+```
+Switching to Verifier role.
+- Check each acceptance criterion with EVIDENCE
+- Run tests → show actual output
+- Run build → show actual output
+- Update story status in prd.json:
+  - All criteria met → status: "passed"
+  - Any criterion failed → status: "failed", increment attempts
+```
+
+### Step 3: Fix (if failed)
+```
+Switching to Debugger role (if needed) then Executor role.
+- Analyze failure
+- Fix the issue
+- Return to Step 2
+```
+
+### Retry Limit
+- Max 3 attempts per story
+- After 3 failures: mark as "blocked", report to user, move to next story
+
+## Phase 3: Final Sign-Off
+
+When all stories are `passed`:
+```
+Switching to Architect role.
+- Review overall implementation coherence
+- Check for integration issues between stories
+- Verify no regression in existing functionality
+- Update prd.json status to "complete"
+```
+
+## State Management
+
+All state lives in `.omc-cursor/`:
+```
+.omc-cursor/
+  prd.json          ← Story tracking
+  notepad.md        ← Decisions and progress notes
+  plans/ralph.md    ← Implementation plan
+```
+
+### Progress Reporting
+
+After each story completion, show:
+```
+Ralph Progress: [====----] 4/8 stories passed
+  S1: passed    S2: passed    S3: passed    S4: passed
+  S5: pending   S6: pending   S7: pending   S8: pending
+```
+
+## Continuation Protocol
+
+Since Cursor doesn't have persistence hooks, if the conversation is interrupted:
+1. Read `.omc-cursor/prd.json` to restore state
+2. Find the first story that is not `passed`
+3. Resume from that story
+4. Say: "Resuming Ralph from story {id}: {title}"
+
+## Rules
+
+- **Never skip verification** — every story must be verified with evidence
+- **Never mark passed without proof** — show test output, build output, or runtime evidence
+- **Update state after every action** — prd.json must always reflect current progress
+- **Report blocked stories immediately** — don't silently skip them

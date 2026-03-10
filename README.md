@@ -8,7 +8,7 @@ Cursor doesn't have Claude Code's `Task` sub-agent spawning — so oh-my-cursor 
 
 ## Features
 
-- **32 Cursor Rules** — agent roles, workflow patterns, and coding practices
+- **39 Cursor Rules** — agent roles, workflow patterns, and coding practices
 - **CLI installer** — `oh-my-cursor install` sets everything up in seconds
 - **`.cursorrules` injection** — marker-based merge preserves your existing content
 - **MCP-compatible** — works alongside Cursor's MCP server integrations
@@ -64,6 +64,10 @@ Open Cursor and start using role-based prompts in your conversations.
 | `omc-scientist` | Scientist | Data analysis and benchmarking |
 | `omc-qa-tester` | QA Tester | Runtime validation and edge case testing |
 | `omc-document-specialist` | Document Specialist | External documentation lookup |
+| `omc-build-fixer` | Build Fixer | Compilation, type, and lint error resolution |
+| `omc-deep-executor` | Deep Executor | Complex autonomous goal-oriented tasks |
+| `omc-harsh-critic` | Harsh Critic | Structured gap analysis with strong rejection |
+| `omc-quality-reviewer` | Quality Reviewer | SOLID principles, anti-patterns, logic analysis |
 
 ## Workflow Patterns
 
@@ -114,6 +118,24 @@ Socratic questioning to clarify requirements before implementation.
 "deslop: clean up AI-generated code"
 ```
 Test-first, deletion-first cleanup of AI-generated code slop.
+
+### Ralph Loop
+```
+"ralph: keep going until all tests pass"
+```
+PRD-driven persistence loop: create stories → implement → verify → repeat until done.
+
+### Learner
+```
+"learn this: always use named exports in this project"
+```
+Extract reusable patterns from sessions and save as `.mdc` rule files.
+
+### Release
+```
+"release: bump version and create changelog"
+```
+Automated release: analyze commits → version bump → changelog → tag.
 
 ## CLI Commands
 

@@ -80,6 +80,22 @@ Format: `[icon Role | workflow:phase]`
 | **Scientist** | Data analysis, benchmarking, metrics interpretation. |
 | **QA Tester** | Runtime validation, edge case exploration, regression testing. |
 | **Document Specialist** | External documentation lookup and reference. |
+| **Build Fixer** | Compilation errors, type errors, lint failures. Minimal diff fixes. |
+| **Deep Executor** | Complex autonomous tasks requiring sustained focus and self-direction. |
+| **Harsh Critic** | Structured gap analysis with strong rejection criteria. High-stakes reviews. |
+| **Quality Reviewer** | SOLID principles, anti-patterns, logic correctness, performance analysis. |
+
+## Pre-Execution Gate
+
+Before implementing ANY request, evaluate complexity:
+
+1. **Trivial** (single file, obvious fix) → Executor role directly
+2. **Clear** (well-defined, 1-2 files) → Executor role directly
+3. **Vague** (no file paths, no function names, no acceptance criteria) → **Planner role first**
+4. **Complex** (3+ files, architectural impact) → **Planner role first**
+5. **Ambiguous** (unclear requirements, multiple interpretations) → **Analyst role first**
+
+**Never start coding on a vague request.** Always plan or clarify first.
 
 ## Delegation Rules
 
@@ -100,6 +116,10 @@ Format: `[icon Role | workflow:phase]`
 - **Data/metrics analysis** → Adopt Scientist role
 - **Runtime testing** → Adopt QA Tester role
 - **"Check the docs"** → Adopt Document Specialist role
+- **Build/type errors** → Adopt Build Fixer role
+- **Complex autonomous task** → Adopt Deep Executor role
+- **"Be harsh" / high-stakes review** → Adopt Harsh Critic role
+- **Quality/design review** → Adopt Quality Reviewer role
 
 ## Workflow Patterns
 
@@ -163,6 +183,71 @@ Test baseline → Identify slop patterns → Delete aggressively →
 Verify behavior preserved
 ```
 
+### Learner (Trigger: "learn this", "save pattern", "remember this")
+```
+Identify pattern → Classify (practice/agent/workflow) →
+Create or update .mdc rule file → Validate → Confirm
+```
+
+### Release (Trigger: "release", "bump version", "changelog")
+```
+Analyze commits since last tag → Determine version bump →
+Generate changelog → Update version → Create release commit + tag
+```
+
+## Handoff Protocol
+
+When switching between roles during a workflow, create a handoff document:
+
+```
+File: .omc-cursor/handoffs/{from-role}-to-{to-role}.md
+
+## Handoff: {From Role} → {To Role}
+
+### Context
+- What was done
+- Key decisions made and rationale
+
+### Deliverables
+- Files created/modified
+- Tests added/updated
+
+### Open Questions
+- Unresolved issues
+- Assumptions that need validation
+
+### Next Steps
+- What the receiving role should do first
+```
+
+This ensures no context is lost during role transitions, especially in long conversations.
+
+## Context Persistence
+
+To survive Cursor's context compression:
+
+### Notepad Protocol
+1. At the start of complex work, create `.omc-cursor/notepad.md`
+2. Write critical information that must survive compression:
+   - Current goal and acceptance criteria
+   - Decisions made and their rationale
+   - Files modified so far
+   - Current step in the workflow
+3. Before each role switch, update the notepad
+4. After context compression, **read `.omc-cursor/notepad.md` first**
+
+### Priority Information (always save to notepad)
+- User's original request (verbatim)
+- Acceptance criteria
+- Architecture decisions
+- Blocked items and their reasons
+
+### Working Information (save during active work)
+- Current step number and description
+- Files being modified
+- Test results
+- Error messages being investigated
+
 ## State Management
 
 All state lives in `.omc-cursor/` (gitignored):
@@ -170,6 +255,8 @@ All state lives in `.omc-cursor/` (gitignored):
 - Session notes: `.omc-cursor/notepad.md`
 - PRD: `.omc-cursor/prd.json`
 - Spec: `.omc-cursor/spec.md`
+- Handoffs: `.omc-cursor/handoffs/*.md`
+- Research: `.omc-cursor/research/*.md`
 
 Write important decisions to these files so context compression doesn't lose them.
 

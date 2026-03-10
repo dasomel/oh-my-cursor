@@ -1,0 +1,82 @@
+---
+description: "Extract reusable patterns from sessions and save as .mdc rule files"
+alwaysApply: false
+---
+
+# Learner Workflow
+
+The Learner extracts reusable patterns, conventions, and lessons from the current session and saves them as `.mdc` rule files or updates existing ones.
+
+## Triggers
+- "learn this", "save this pattern", "remember this", "extract rule"
+
+## When to Use
+
+- After discovering a project convention
+- After solving a recurring problem
+- After the user corrects a pattern multiple times
+- When a debugging technique proves effective
+- When a coding pattern should be consistently applied
+
+## Protocol
+
+### Step 1: Identify the Pattern
+```
+Ask yourself:
+1. What did I learn that applies beyond this specific task?
+2. Is this a project convention, a general practice, or a debugging technique?
+3. Would this prevent future mistakes if codified?
+4. Is it specific enough to be actionable?
+```
+
+### Step 2: Classify the Pattern
+
+| Type | Directory | Example |
+|------|-----------|---------|
+| Coding convention | `rules/practices/` | "Always use named exports" |
+| Agent behavior | `rules/agents/` | "Always check for null before accessing nested properties" |
+| Workflow improvement | `rules/workflows/` | "Run lint before commit" |
+| Project-specific | `.cursor/rules/` | "Use camelCase for API endpoints in this project" |
+
+### Step 3: Create or Update Rule
+
+#### For new rules:
+Create a `.mdc` file with proper frontmatter:
+```yaml
+---
+description: "Concise description of what this rule enforces"
+alwaysApply: false  # or true for universal rules
+globs:              # optional: auto-attach for matching files
+  - "**/*.ts"
+---
+```
+
+#### For existing rules:
+Read the existing rule, then append the new pattern to the appropriate section.
+
+### Step 4: Validate
+```
+1. Read the created/updated rule file
+2. Verify it's well-formed YAML frontmatter + Markdown
+3. Check it doesn't conflict with existing rules
+4. Confirm with user: "Saved pattern: {description}. Applied to: {scope}"
+```
+
+## Output Format
+
+```markdown
+## Learned Pattern
+
+**Pattern**: {what was learned}
+**Source**: {what triggered the learning — user correction, repeated issue, etc.}
+**Saved to**: {file path}
+**Scope**: {when this rule activates}
+**Conflicts**: {none | list of potential conflicts with existing rules}
+```
+
+## Rules
+
+- **Be specific** — "use error boundaries" is too vague; "wrap async route handlers in try-catch with proper HTTP status codes" is actionable
+- **Don't over-generalize** — one instance isn't a pattern; wait for 2+ occurrences or explicit user instruction
+- **Check for conflicts** — read existing rules in the same category before creating new ones
+- **Ask before creating** project-wide `alwaysApply` rules — they affect every conversation

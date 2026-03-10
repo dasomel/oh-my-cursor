@@ -1,0 +1,85 @@
+---
+description: "Automated release workflow — versioning, changelog generation, tagging"
+alwaysApply: false
+---
+
+# Release Workflow
+
+Structured release process for versioning, changelog generation, and git tagging.
+
+## Triggers
+- "release", "bump version", "create release", "changelog"
+
+## Protocol
+
+### Step 1: Analyze Changes (Explorer Role)
+```
+Switching to Explorer role.
+1. git log --oneline {last-tag}..HEAD → list all commits since last release
+2. Categorize commits by type (feat, fix, docs, refactor, etc.)
+3. Identify breaking changes
+4. Determine version bump: major | minor | patch
+```
+
+### Version Bump Rules
+| Change Type | Bump | Example |
+|-------------|------|---------|
+| Breaking change | major | Removing API endpoint |
+| New feature | minor | Adding new command |
+| Bug fix | patch | Fixing existing behavior |
+| Docs/refactor only | patch | README updates |
+
+### Step 2: Generate Changelog (Writer Role)
+```
+Switching to Writer role.
+Update CHANGELOG.md with:
+
+## [X.Y.Z] - YYYY-MM-DD
+
+### Added
+- feat: description (#PR)
+
+### Fixed
+- fix: description (#PR)
+
+### Changed
+- refactor: description (#PR)
+
+### Breaking Changes
+- BREAKING: description
+```
+
+### Step 3: Bump Version (Executor Role)
+```
+Switching to Executor role.
+1. Update version in package.json
+2. Update version in any other version references
+3. Update CHANGELOG.md
+4. Verify build passes with new version
+```
+
+### Step 4: Create Release Commit (Git Master Role)
+```
+Switching to Git Master role.
+1. Stage: package.json, CHANGELOG.md, and any version files
+2. Commit: "chore: release vX.Y.Z"
+3. Tag: git tag -a vX.Y.Z -m "Release vX.Y.Z"
+4. Present for user approval before pushing
+```
+
+### Step 5: User Approval
+```
+Release vX.Y.Z ready:
+- Commits included: N
+- Version bump: {type}
+- Changelog: updated
+
+Push to remote? (user must confirm)
+```
+
+## Rules
+
+- **Never push without user approval**
+- **Never skip changelog** — every release must document changes
+- **Follow semver strictly** — breaking changes = major bump
+- **Verify build before tagging** — don't release broken code
