@@ -1,0 +1,93 @@
+---
+description: "Refactoring patterns catalog — code smells, composing methods, moving features, simplifying conditionals"
+alwaysApply: false
+globs:
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.js"
+  - "**/*.jsx"
+  - "**/*.py"
+  - "**/*.go"
+  - "**/*.rs"
+---
+
+# Refactoring Patterns
+
+A catalog of refactoring patterns organized by category. Apply these when improving code structure without changing behavior.
+
+## 1. Code Smells (Triggers for Refactoring)
+
+| Smell | Symptom | Primary Fix |
+|-------|---------|-------------|
+| **Long Method** | Function > 20 lines | Extract Method |
+| **Duplicate Code** | Same logic in 2+ places | Extract Method / Extract Class |
+| **Feature Envy** | Method uses another class's data more than its own | Move Method |
+| **Shotgun Surgery** | One change requires editing many files | Move Method / Inline Class |
+| **Divergent Change** | One class modified for many different reasons | Extract Class |
+| **Primitive Obsession** | Using primitives instead of domain types | Replace Data Value with Object |
+| **Long Parameter List** | Function takes > 4 parameters | Introduce Parameter Object |
+| **Data Clumps** | Same group of data appears together repeatedly | Extract Class |
+
+## 2. Composing Methods
+
+Break large methods into smaller, intention-revealing pieces:
+
+- **Extract Method** — Move code fragment into a named method
+- **Inline Method** — Replace a method call with the method's body (when name adds nothing)
+- **Replace Temp with Query** — Extract expression into a method, replace temp variable
+- **Split Temporary Variable** — One variable for one purpose
+- **Replace Method with Method Object** — Turn long method into its own class
+
+## 3. Moving Features Between Objects
+
+Redistribute responsibilities:
+
+- **Move Method** — Method uses more features of another class
+- **Move Field** — Field used more by another class
+- **Extract Class** — Class doing work of two → split it
+- **Inline Class** — Class doing almost nothing → merge it
+- **Hide Delegate** — Client calls through a chain → add wrapper
+- **Remove Middle Man** — Too many delegating methods → expose delegate
+
+## 4. Organizing Data
+
+- **Replace Magic Number with Constant** — Named constants over raw numbers
+- **Replace Data Value with Object** — Primitive → domain type
+- **Encapsulate Field** — Public field → getter/setter
+- **Encapsulate Collection** — Return unmodifiable view
+- **Replace Type Code with Subclass/Strategy** — Type codes → polymorphism
+
+## 5. Simplifying Conditionals
+
+- **Decompose Conditional** — Extract condition and branches into named methods
+- **Consolidate Conditional** — Combine conditions with same result
+- **Replace Nested Conditional with Guard Clauses** — Flatten deep nesting
+- **Replace Conditional with Polymorphism** — Type-based switching → subclasses
+- **Introduce Special Case (Null Object)** — Eliminate null checks
+- **Introduce Assertion** — Make assumptions explicit
+
+## 6. Safe Refactoring Workflow
+
+```
+1. Ensure tests pass (baseline)
+2. Make ONE refactoring change
+3. Run tests again
+4. Commit if green
+5. Repeat
+```
+
+**Never refactor and add features in the same commit.**
+
+### Preparatory Refactoring
+Before adding a feature, refactor the code to make the feature easy to add:
+```
+"First make the change easy, then make the easy change." — Kent Beck
+```
+
+### Branch by Abstraction (for large refactors)
+```
+1. Create abstraction over the code to be changed
+2. Migrate callers to use the abstraction
+3. Replace the implementation behind the abstraction
+4. Remove the abstraction if no longer needed
+```

@@ -1,0 +1,114 @@
+---
+description: "Design patterns guide — when and how to apply common patterns, anti-patterns to avoid"
+alwaysApply: false
+globs:
+  - "**/*.ts"
+  - "**/*.tsx"
+  - "**/*.js"
+  - "**/*.jsx"
+  - "**/*.py"
+  - "**/*.go"
+  - "**/*.rs"
+---
+
+# Design Patterns
+
+Apply patterns that solve genuine problems. Prefer composition over inheritance. Don't force patterns where simple code suffices.
+
+## Creational Patterns
+
+### Factory
+Create objects without specifying exact classes.
+```
+Use when: Object creation logic is complex or varies by context
+Avoid when: A simple constructor call is sufficient
+```
+
+### Builder
+Construct complex objects step by step.
+```
+Use when: Object has many optional parameters or complex construction
+Avoid when: Object has few parameters (use constructor or factory)
+```
+
+## Structural Patterns
+
+### Adapter
+Make incompatible interfaces work together.
+```
+Use when: Integrating third-party libraries with different interfaces
+Avoid when: You control both sides — just align the interfaces
+```
+
+### Facade
+Simplify complex subsystems with a unified interface.
+```
+Use when: A subsystem has too many entry points for the caller
+Avoid when: The subsystem is already simple
+```
+
+### Decorator
+Add responsibilities dynamically without modifying the original.
+```
+Use when: Need to add behavior to objects at runtime
+Avoid when: A simple inheritance hierarchy is clearer
+```
+
+## Behavioral Patterns
+
+### Strategy
+Define a family of algorithms, make them interchangeable.
+```
+Use when: Multiple algorithms for the same task, selected at runtime
+Avoid when: Only one algorithm exists (premature abstraction)
+```
+
+### Observer
+One-to-many dependency for event notification.
+```
+Use when: Multiple components need to react to state changes
+Avoid when: Simple callback is sufficient
+```
+
+### Repository
+Abstract data access from business logic.
+```
+Use when: Business logic should be independent of data source
+Avoid when: Simple scripts with direct database access
+```
+
+## Dependency Injection
+Invert control by injecting dependencies.
+```
+Use when: Components should be testable and loosely coupled
+Avoid when: Global state is acceptable (scripts, CLIs)
+```
+
+## Anti-Patterns to Avoid
+
+| Anti-Pattern | Problem | Fix |
+|-------------|---------|-----|
+| **God Object** | One class does everything | Extract classes by responsibility |
+| **Singleton Abuse** | Global state disguised as pattern | Use DI instead |
+| **Premature Abstraction** | Pattern for one use case | Wait for 2-3 uses before abstracting |
+| **Golden Hammer** | Applying favorite pattern everywhere | Choose pattern that fits the problem |
+| **Lava Flow** | Dead code kept "just in case" | Delete it; git has history |
+
+## Decision Guide
+
+```
+Is the code hard to test?        → Dependency Injection
+Is the code hard to extend?      → Strategy or Decorator
+Is the API too complex?          → Facade
+Is object creation complex?      → Factory or Builder
+Need to react to changes?        → Observer
+Need data source flexibility?    → Repository
+Integrating external code?       → Adapter
+```
+
+## Rules
+
+- **Solve real problems** — don't add patterns for theoretical future needs
+- **Composition > Inheritance** — prefer has-a over is-a relationships
+- **Name reveals intent** — pattern should be obvious from class/function names
+- **One pattern per problem** — don't stack patterns unnecessarily

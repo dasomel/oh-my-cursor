@@ -34,6 +34,8 @@ RULES=(
   "practices/karpathy-guidelines"
   "practices/performance"
   "practices/security"
+  "practices/refactoring-patterns"
+  "practices/design-patterns"
   "practices/testing"
   "workflows/autopilot"
   "workflows/deep-interview"
@@ -44,6 +46,7 @@ RULES=(
   "workflows/release"
   "workflows/slop-cleaner"
   "workflows/tdd"
+  "workflows/swarm"
   "workflows/ultraqa"
 )
 

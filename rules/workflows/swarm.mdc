@@ -1,0 +1,107 @@
+---
+description: "Micro-task decomposition — break large tasks into 5-10 independent units for systematic execution"
+alwaysApply: false
+---
+
+# Swarm Workflow
+
+Swarm decomposes large requests into 5-10 independent micro-tasks for systematic, focused execution. Inspired by parallel swarm patterns, adapted for Cursor's single-agent model.
+
+## Triggers
+- "swarm", "decompose", "break this down", "micro-tasks", "divide and conquer"
+
+## When to Use
+
+- Large features spanning multiple files
+- Refactoring across many modules
+- Bulk operations (add tests to 10 files, update all endpoints, etc.)
+- Tasks where independent pieces can be clearly identified
+
+## Protocol
+
+### Phase 1: Decompose
+
+Break the request into 5-10 independent micro-tasks. Each micro-task must be:
+```
+- Scoped to a single file or function
+- Independently completable (no dependencies on other micro-tasks)
+- Small enough to complete in one focused session
+- Clearly defined with specific deliverables
+```
+
+### Task Template
+For each micro-task, define:
+```markdown
+## Task {N}: {title}
+- **File**: {specific file path}
+- **Goal**: {atomic, measurable objective}
+- **Acceptance**: {how to verify completion}
+- **Constraints**: {what NOT to change}
+```
+
+### Phase 2: Sequence
+
+Order tasks by dependency:
+```
+1. Independent tasks first (can run in any order)
+2. Tasks with dependencies after their prerequisites
+3. Integration/verification tasks last
+```
+
+Write the task list to `.omc-cursor/plans/swarm-{name}.md`.
+
+### Phase 3: Execute
+
+For each micro-task:
+```
+Switching to Executor role.
+1. Read ONLY the files relevant to this task
+2. Make the minimum change needed
+3. Self-verify:
+   - Does the change compile/lint?
+   - Does it satisfy the acceptance criteria?
+   - Did it avoid touching files outside scope?
+4. Mark task complete in the plan
+5. Move to next task
+```
+
+### Phase 4: Verify
+
+After all tasks complete:
+```
+Switching to Verifier role.
+1. Check cross-file consistency
+2. Run full test suite
+3. Run build
+4. Verify no integration issues between micro-tasks
+5. Fix any issues inline (don't re-decompose)
+```
+
+## Code Quality Rules (per micro-task)
+
+- Functions ≤ 20 lines
+- Nesting ≤ 2 levels
+- No ternary chains
+- No complex one-liners
+- Each function does one thing
+
+## Progress Display
+
+```
+Swarm Progress: [========--] 8/10 tasks
+  T1: done   T2: done   T3: done   T4: done   T5: done
+  T6: done   T7: done   T8: done   T9: next   T10: pending
+```
+
+## Escalation
+
+- If a micro-task fails 2x → expand its scope or merge with adjacent task
+- If 3+ tasks fail → switch to Planner role, reassess the decomposition
+- If tasks have unexpected dependencies → re-sequence and document
+
+## Rules
+
+- **Never skip decomposition** — even if it feels unnecessary, the discipline prevents scope creep
+- **One task at a time** — complete each fully before starting the next
+- **No scope creep per task** — if you discover needed work, add a new task, don't expand the current one
+- **Assumptions are OK** — workers make reasonable assumptions rather than blocking on questions

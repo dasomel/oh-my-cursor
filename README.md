@@ -8,7 +8,7 @@ Cursor doesn't have Claude Code's `Task` sub-agent spawning — so oh-my-cursor 
 
 ## Features
 
-- **39 Cursor Rules** — agent roles, workflow patterns, and coding practices
+- **42 Cursor Rules** — agent roles, workflow patterns, and coding practices
 - **CLI installer** — `oh-my-cursor install` sets everything up in seconds
 - **`.cursorrules` injection** — marker-based merge preserves your existing content
 - **MCP-compatible** — works alongside Cursor's MCP server integrations
@@ -194,7 +194,7 @@ oh-my-cursor uses file-based state in `.omc-cursor/` (gitignored):
 
 ## Installed Files
 
-After `oh-my-cursor install`, your project gets 39 rule files:
+After `oh-my-cursor install`, your project gets 42 rule files:
 
 ```
 .cursor/rules/
@@ -212,14 +212,16 @@ After `oh-my-cursor install`, your project gets 39 rule files:
   omc-document-specialist.mdc  omc-verifier.mdc
   omc-executor.mdc             omc-writer.mdc
   omc-explore.mdc              omc-git-master.mdc
-  # Workflows (10 patterns)
+  # Workflows (11 patterns)
   omc-autopilot.mdc            omc-ralph.mdc
   omc-deep-interview.mdc       omc-ralplan.mdc
   omc-learner.mdc              omc-release.mdc
   omc-plan-execute.mdc         omc-slop-cleaner.mdc
-  omc-tdd.mdc                  omc-ultraqa.mdc
-  # Practices (6 standards)
+  omc-swarm.mdc                omc-tdd.mdc
+  omc-ultraqa.mdc
+  # Practices (8 standards)
   omc-coding-style.mdc         omc-performance.mdc
+  omc-design-patterns.mdc      omc-refactoring-patterns.mdc
   omc-git-workflow.mdc         omc-security.mdc (always applied)
   omc-karpathy-guidelines.mdc  omc-testing.mdc
 
@@ -235,7 +237,8 @@ After `oh-my-cursor install`, your project gets 39 rule files:
 
 ## Credits
 
-Inspired by [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) by Yeachan Heo — multi-agent orchestration for Claude Code CLI.
+- [oh-my-claudecode](https://github.com/Yeachan-Heo/oh-my-claudecode) by Yeachan Heo — multi-agent orchestration for Claude Code CLI
+- [oh-my-cursor](https://github.com/tmcfarlane/oh-my-cursor) by tmcfarlane — Team Avatar agent orchestration for Cursor (swarm decomposition, refactoring patterns, design patterns, escalation protocol)
 
 ## License
 

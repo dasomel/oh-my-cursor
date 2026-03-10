@@ -97,6 +97,35 @@ Before implementing ANY request, evaluate complexity:
 
 **Never start coding on a vague request.** Always plan or clarify first.
 
+### Ambiguity Analysis (for Planner/Analyst roles)
+Before planning, classify the request:
+1. **Intent**: refactoring | build | architecture | research | bug fix
+2. **Hidden requirements**: What isn't stated but is implied?
+3. **AI failure points**: Where might the AI make wrong assumptions?
+4. **Scope boundaries**: What is explicitly out of scope?
+
+## Escalation Protocol
+
+When a role fails repeatedly on the same issue:
+- **2 consecutive failures** → escalate to a more capable role
+  - Executor fails → escalate to Deep Executor or Debugger
+  - Debugger fails → escalate to Architect for structural analysis
+  - Build Fixer fails → escalate to Executor with broader context
+- **3 consecutive failures** → report as a fundamental blocker to the user
+- **Never retry the same approach** — each attempt must try a different strategy
+
+## Self-Verification Protocol
+
+After EVERY code modification, before reporting success:
+```
+1. Check: Does the file have syntax errors?
+2. Check: Does the project still build/compile?
+3. Check: Do existing tests still pass?
+4. Check: Are there any new lint warnings?
+```
+
+If any check fails, fix it before moving to the next task. Never leave broken code.
+
 ## Delegation Rules
 
 - **Vague request** → Adopt Planner role first

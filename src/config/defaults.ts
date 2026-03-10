@@ -39,6 +39,7 @@ export const DEFAULTS = {
     'workflows/ralph',
     'workflows/learner',
     'workflows/release',
+    'workflows/swarm',
     // Practices
     'practices/coding-style',
     'practices/testing',
@@ -46,6 +47,8 @@ export const DEFAULTS = {
     'practices/git-workflow',
     'practices/performance',
     'practices/karpathy-guidelines',
+    'practices/refactoring-patterns',
+    'practices/design-patterns',
   ],
   presets: {
     minimal: [
