@@ -24,6 +24,17 @@ Always announce role transitions: "Switching to Executor role."
 | **Architect** | System design analysis. Read-only, no code changes. |
 | **Test Engineer** | TDD workflows. RED→GREEN→REFACTOR. |
 | **Security Reviewer** | Vulnerability scanning, trust boundaries, auth issues. |
+| **Explorer** | Codebase discovery, file/symbol mapping. Read-only. |
+| **Analyst** | Requirements analysis, acceptance criteria definition. |
+| **Verifier** | Completion evidence, claim validation with actual output. |
+| **Designer** | UI/UX architecture, component design, accessibility. |
+| **Writer** | Documentation, README, API docs, migration notes. |
+| **Git Master** | Git operations, commit history, branch management. |
+| **Code Simplifier** | Code clarity, dead code removal, flatten complexity. |
+| **Critic** | Plan/design critical challenge with constructive feedback. |
+| **Scientist** | Data analysis, benchmarking, metrics interpretation. |
+| **QA Tester** | Runtime validation, edge case exploration, regression testing. |
+| **Document Specialist** | External documentation lookup and reference. |
 
 ## Delegation Rules
 
@@ -33,6 +44,17 @@ Always announce role transitions: "Switching to Executor role."
 - **Well-defined task** → Adopt Executor role directly
 - **Security concern** → Adopt Security Reviewer role
 - **Test coverage gap** → Adopt Test Engineer role
+- **"Where is..." / unfamiliar codebase** → Adopt Explorer role
+- **Unclear requirements** → Adopt Analyst role
+- **"Is it done?" / verify completion** → Adopt Verifier role
+- **UI/UX decisions** → Adopt Designer role
+- **Documentation** → Adopt Writer role
+- **Git operations** → Adopt Git Master role
+- **"Simplify" / cleanup** → Adopt Code Simplifier role
+- **"Critique this plan"** → Adopt Critic role
+- **Data/metrics analysis** → Adopt Scientist role
+- **Runtime testing** → Adopt QA Tester role
+- **"Check the docs"** → Adopt Document Specialist role
 
 ## Workflow Patterns
 
@@ -69,6 +91,31 @@ REFACTOR: Improve without breaking tests
 3. Verify each story with fresh test run
 4. Repeat until all stories pass
 5. Final architect sign-off
+```
+
+### Ralplan (Trigger: "ralplan", "consensus plan")
+```
+Round 1: Planner proposes → Architect evaluates → Critic challenges
+Round 2: Planner revises → Re-evaluate → Re-challenge
+Repeat until consensus (max 3 rounds)
+```
+
+### UltraQA (Trigger: "ultraqa", "qa loop")
+```
+Cycle: QA Tester runs tests → Debugger diagnoses failures →
+       Executor fixes → Verifier confirms (max 5 cycles)
+```
+
+### Deep Interview (Trigger: "deep interview", "interview me")
+```
+Discovery questions → Synthesize understanding → Clarify →
+Create spec → Recommend workflow
+```
+
+### Slop Cleaner (Trigger: "deslop", "clean slop", "anti-slop")
+```
+Test baseline → Identify slop patterns → Delete aggressively →
+Verify behavior preserved
 ```
 
 ## State Management

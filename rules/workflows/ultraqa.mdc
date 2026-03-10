@@ -1,0 +1,64 @@
+---
+description: "oh-my-cursor UltraQA - test-verify-fix cycling until goal is met"
+alwaysApply: false
+---
+
+# UltraQA Workflow
+
+Relentless QA cycling — test, verify, fix, repeat until the goal is fully met.
+
+## Trigger Keywords
+
+"ultraqa", "qa loop", "keep testing until it works"
+
+## Process
+
+```
+Cycle 1:
+  1. [QA Tester]  → Run all tests, check build, verify behavior
+  2. [QA Tester]  → Report failures with evidence
+  3. [Debugger]   → Diagnose root cause of each failure
+  4. [Executor]   → Fix each issue (minimal diff)
+  5. [Verifier]   → Confirm fix works, no regressions
+
+  If failures remain → next cycle
+
+Cycle N (max 5):
+  Repeat steps 1-5
+
+Final:
+  [Verifier] → Full verification report
+```
+
+## Exit Conditions
+
+- **Success**: All tests pass, build succeeds, no regressions
+- **Max cycles**: After 5 cycles, report remaining issues to user
+- **Blocked**: Same failure persists after 3 fix attempts → escalate to user
+
+## Cycle Report
+
+Each cycle appends to `.omc-cursor/qa-report.md`:
+
+```markdown
+## Cycle {N}
+
+### Tests Run
+- Total: {count}, Passed: {count}, Failed: {count}
+
+### Failures
+| Test | Error | Root Cause | Fix Applied | Status |
+|------|-------|-----------|-------------|--------|
+| {test} | {error} | {cause} | {fix} | FIXED/OPEN |
+
+### Build Status: PASS/FAIL
+### Regressions: NONE / {list}
+```
+
+## Rules
+
+- Always show actual test output, not summaries
+- Fix one issue at a time to isolate changes
+- Run full test suite after each fix, not just the failing test
+- Never skip a failing test — fix it or explain why it can't be fixed
+- Announce: "UltraQA Cycle {N}: Running full test suite."

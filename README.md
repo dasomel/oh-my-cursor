@@ -8,7 +8,7 @@ Cursor doesn't have Claude Code's `Task` sub-agent spawning — so oh-my-cursor 
 
 ## Features
 
-- **16 Cursor Rules** — agent roles, workflow patterns, and coding practices
+- **32 Cursor Rules** — agent roles, workflow patterns, and coding practices
 - **CLI installer** — `oh-my-cursor install` sets everything up in seconds
 - **`.cursorrules` injection** — marker-based merge preserves your existing content
 - **MCP-compatible** — works alongside Cursor's MCP server integrations
@@ -53,6 +53,17 @@ Open Cursor and start using role-based prompts in your conversations.
 | `omc-architect` | Architect | System design and trade-off analysis |
 | `omc-test-engineer` | Test Engineer | TDD workflows and test strategy |
 | `omc-security-reviewer` | Security Reviewer | Vulnerability and trust boundary analysis |
+| `omc-explore` | Explorer | Codebase discovery and file/symbol mapping |
+| `omc-analyst` | Analyst | Requirements analysis and acceptance criteria |
+| `omc-verifier` | Verifier | Completion evidence and claim validation |
+| `omc-designer` | Designer | UI/UX architecture and interaction design |
+| `omc-writer` | Writer | Documentation, README, API docs |
+| `omc-git-master` | Git Master | Git operations and branch management |
+| `omc-code-simplifier` | Code Simplifier | Code clarity and dead code removal |
+| `omc-critic` | Critic | Plan/design critical challenge |
+| `omc-scientist` | Scientist | Data analysis and benchmarking |
+| `omc-qa-tester` | QA Tester | Runtime validation and edge case testing |
+| `omc-document-specialist` | Document Specialist | External documentation lookup |
 
 ## Workflow Patterns
 
@@ -79,6 +90,30 @@ AI follows RED → GREEN → REFACTOR cycle strictly.
 "ralph: keep going until all tests pass"
 ```
 AI loops through PRD → Implement → Verify until done.
+
+### Ralplan
+```
+"ralplan: consensus plan for the new API"
+```
+Iterative planning: Planner → Architect → Critic → consensus (max 3 rounds).
+
+### UltraQA
+```
+"ultraqa: keep testing until everything passes"
+```
+QA cycle: test → diagnose → fix → verify → repeat (max 5 cycles).
+
+### Deep Interview
+```
+"deep interview: understand before coding"
+```
+Socratic questioning to clarify requirements before implementation.
+
+### Slop Cleaner
+```
+"deslop: clean up AI-generated code"
+```
+Test-first, deletion-first cleanup of AI-generated code slop.
 
 ## CLI Commands
 

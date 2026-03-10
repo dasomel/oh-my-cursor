@@ -1,0 +1,61 @@
+---
+description: "oh-my-cursor Karpathy Guidelines - coding discipline: think before coding, simplicity, surgical changes"
+alwaysApply: false
+---
+
+# Karpathy Guidelines
+
+Coding discipline inspired by Andrej Karpathy's principles.
+
+## Core Principles
+
+### 1. Think Before Coding
+- Understand the problem completely before writing any code
+- If you can't explain the approach in plain language, you're not ready to code
+- 10 minutes of thinking saves 2 hours of debugging
+
+### 2. Simplicity Above All
+- The best code is code you didn't write
+- Every line of code is a liability — minimize it
+- If a junior developer can't understand it, it's too complex
+- Choose boring technology over clever solutions
+
+### 3. Surgical Changes
+- Change the minimum needed to solve the problem
+- Don't "clean up" code around your change
+- Don't refactor while fixing bugs
+- One PR, one purpose
+
+### 4. Verify Everything
+- Don't trust your assumptions — run the code
+- Write the test that would have caught this bug
+- If you can't test it, you can't ship it
+- "It works on my machine" is not verification
+
+### 5. Read More Code Than You Write
+- Read the existing code before changing it
+- Understand why the code is the way it is
+- The previous developer might have had a good reason
+- Chesterton's Fence: don't remove something until you understand why it's there
+
+## Anti-Patterns to Avoid
+
+- **Resume-Driven Development** — using fancy tech to learn it, not because it's needed
+- **Premature Abstraction** — "we might need this later" (you won't)
+- **Config-Driven Everything** — hardcode first, extract config only when needed
+- **Framework Tourism** — switching frameworks instead of solving the actual problem
+
+## Decision Framework
+
+Before writing code, ask:
+1. Can I solve this without code? (config change, removal, documentation)
+2. Can I solve this with less code? (simpler algorithm, existing library)
+3. Will someone else understand this in 6 months?
+4. Am I solving the actual problem or a hypothetical one?
+
+## Rules
+
+- Delete code whenever possible — less is more
+- Prefer explicit over implicit
+- Prefer flat over nested
+- Prefer simple over clever

@@ -1,0 +1,74 @@
+---
+description: "oh-my-cursor Deep Interview - Socratic questioning before autonomous execution"
+alwaysApply: false
+---
+
+# Deep Interview Workflow
+
+Socratic deep interview — ask the right questions before writing any code.
+
+## Trigger Keywords
+
+"deep interview", "interview me", "understand before coding"
+
+## Process
+
+```
+Phase 1: DISCOVERY (3-5 questions)
+  Ask targeted questions to understand:
+  - What problem are we solving? (not what solution to build)
+  - Who is affected?
+  - What does success look like?
+  - What constraints exist?
+  - What has been tried before?
+
+Phase 2: SYNTHESIS
+  Summarize understanding → .omc-cursor/interview.md
+  Present summary → "Is this accurate?"
+
+Phase 3: CLARIFICATION (if needed)
+  Ask 1-2 follow-up questions on ambiguous areas
+
+Phase 4: HANDOFF
+  Create clear spec → .omc-cursor/spec.md
+  Recommend workflow: Plan-Execute, Autopilot, or TDD
+```
+
+## Question Design Principles
+
+- **Open-ended first** — "What are you trying to achieve?" not "Do you want X or Y?"
+- **Problem before solution** — Understand the problem before discussing implementation
+- **One question at a time** — Don't overwhelm with multiple questions
+- **Listen for unstated needs** — What they didn't say is often important
+
+## Output
+
+```markdown
+# Interview Summary
+
+## Problem Statement
+{1-2 sentences describing the core problem}
+
+## Requirements (Confirmed)
+- {requirement from user's answers}
+
+## Constraints
+- {technical, time, resource constraints}
+
+## Success Criteria
+- {measurable outcomes}
+
+## Recommended Approach
+{workflow recommendation with reasoning}
+
+## Open Questions
+- {anything still unclear}
+```
+
+## Rules
+
+- **Never start coding during interview** — this is discovery only
+- Maximum 5 questions in Phase 1 (respect user's time)
+- Summarize understanding before proceeding
+- If user says "just do it", skip remaining questions and proceed with best understanding
+- Announce: "Starting Deep Interview — I'll ask a few questions before we begin."

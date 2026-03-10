@@ -1,0 +1,71 @@
+---
+description: "oh-my-cursor Ralplan - iterative planning with consensus between Planner, Architect, and Critic"
+alwaysApply: false
+---
+
+# Ralplan Workflow
+
+Iterative planning with consensus — Planner proposes, Architect evaluates, Critic challenges, repeat until consensus.
+
+## Trigger Keywords
+
+"ralplan", "consensus plan", "plan with review"
+
+## Process
+
+```
+Round 1:
+  [Planner]   → Create initial plan → .omc-cursor/plans/{task}.md
+  [Architect] → Evaluate feasibility, design concerns
+  [Critic]    → Challenge assumptions, find gaps
+
+  If concerns exist → Planner revises plan
+
+Round 2:
+  [Planner]   → Revised plan incorporating feedback
+  [Architect] → Re-evaluate
+  [Critic]    → Re-challenge
+
+  Repeat until: All roles agree (max 3 rounds)
+
+Final:
+  Present consensus plan to user → Await approval
+```
+
+## Consensus Criteria
+
+A plan reaches consensus when:
+- Architect confirms feasibility and sound design
+- Critic has no HIGH-severity concerns remaining
+- All acceptance criteria are testable
+- Risk mitigations are defined for identified risks
+
+## Output
+
+Each round updates `.omc-cursor/plans/{task}.md` with:
+
+```markdown
+# Plan: {task}
+
+## Round {N} — {status: DRAFT / REVISED / CONSENSUS}
+
+### Plan
+{steps}
+
+### Architect Feedback
+{feasibility assessment}
+
+### Critic Feedback
+{concerns with severity}
+
+### Changes from Previous Round
+{what was revised and why}
+```
+
+## Rules
+
+- Maximum 3 rounds — if no consensus, present best version with noted disagreements
+- Each role must provide concrete, actionable feedback
+- Planner must address every HIGH concern in revision
+- Don't over-plan — stop when the plan is "good enough to start"
+- Announce role transitions: "Round 2: Switching to Architect role for feasibility review."

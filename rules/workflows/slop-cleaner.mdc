@@ -1,0 +1,68 @@
+---
+description: "oh-my-cursor Slop Cleaner - clean AI-generated code with test-first, deletion-first approach"
+alwaysApply: false
+---
+
+# Slop Cleaner Workflow
+
+Clean AI-generated code slop — test first, then delete aggressively.
+
+## Trigger Keywords
+
+"deslop", "clean slop", "anti-slop", "AI generated cleanup"
+
+## What is "Slop"?
+
+AI-generated code that works but has quality issues:
+- Unnecessary abstractions (wrapper functions used once)
+- Over-defensive error handling (checking impossible states)
+- Verbose comments explaining obvious code
+- Feature flags and backward-compatibility shims for nothing
+- Premature optimization or generalization
+- Copy-pasted patterns that should be unified
+
+## Process
+
+```
+Phase 1: TEST BASELINE
+  [Test Engineer] → Ensure existing tests pass
+  [Test Engineer] → Add missing tests for current behavior
+  → Tests are our safety net for deletion
+
+Phase 2: IDENTIFY SLOP
+  [Code Simplifier] → Scan for slop patterns:
+    - Dead code, unused exports, unreachable branches
+    - Single-use abstractions
+    - Comments that restate the code
+    - Over-engineered error handling
+    - Unnecessary type assertions
+
+Phase 3: DELETE (not refactor!)
+  [Executor] → For each slop item:
+    1. Delete it
+    2. Run tests
+    3. If tests pass → keep deletion
+    4. If tests fail → undo, investigate, then fix properly
+
+Phase 4: VERIFY
+  [Verifier] → Full test suite, build, type check
+  [Reviewer] → Quick review of changes
+```
+
+## Deletion Priorities
+
+| Priority | Target | Action |
+|----------|--------|--------|
+| 1 | Dead code | Delete entirely |
+| 2 | Obvious comments | Delete (`// increment i` above `i++`) |
+| 3 | Single-use wrappers | Inline the code |
+| 4 | Unnecessary try/catch | Remove if error can't happen |
+| 5 | Premature abstractions | Flatten to direct code |
+
+## Rules
+
+- **Delete before refactoring** — simpler is always better
+- **Tests first** — never delete without test coverage
+- **One deletion at a time** — commit after each successful deletion
+- **Preserve behavior** — slop cleaning changes style, never logic
+- Announce: "Starting Slop Cleaner — establishing test baseline first."
