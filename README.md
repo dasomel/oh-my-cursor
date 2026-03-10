@@ -31,7 +31,7 @@ cd your-project
 PROJECT=$(pwd) make -f ~/.oh-my-cursor/Makefile install
 ```
 
-### Option 3: npm (CLI with add/remove/doctor)
+### Option 3: npm (coming soon)
 
 ```bash
 npm install -g oh-my-cursor
