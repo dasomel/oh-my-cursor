@@ -125,6 +125,8 @@ oh-my-cursor add workflows/tdd # 카테고리/이름으로 추가
 oh-my-cursor remove executor   # 규칙 제거
 oh-my-cursor list              # 설치 상태 확인
 oh-my-cursor list --available  # 사용 가능한 모든 규칙 표시
+oh-my-cursor update            # 변경된 규칙만 업데이트
+oh-my-cursor update --force    # 모든 규칙 강제 업데이트
 oh-my-cursor doctor            # 설치 진단
 ```
 

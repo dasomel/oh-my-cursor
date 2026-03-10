@@ -125,6 +125,8 @@ oh-my-cursor add workflows/tdd # Add by category/name
 oh-my-cursor remove executor   # Remove a rule
 oh-my-cursor list              # Show installation status
 oh-my-cursor list --available  # Show all available rules
+oh-my-cursor update            # Update changed rules only
+oh-my-cursor update --force    # Force update all rules
 oh-my-cursor doctor            # Diagnose installation
 ```
 
