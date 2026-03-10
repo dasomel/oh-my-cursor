@@ -185,34 +185,44 @@ oh-my-cursor는 `.omc-cursor/`에 파일 기반 상태를 저장합니다 (gitig
 .omc-cursor/
   plans/       ← Planner 역할이 생성한 구현 계획
   notepad.md   ← 세션 노트 (컨텍스트 압축에서 유지)
+  prd.json     ← Ralph 워크플로우의 PRD
   spec.md      ← Autopilot 워크플로우의 요구사항
-  state.json   ← 워크플로우 상태
+  handoffs/    ← 역할 전환 문서
+  research/    ← 리서치 세션 노트
   backups/     ← 수정된 파일의 백업
 ```
 
 ## 설치되는 파일
 
-`oh-my-cursor install` 실행 후 프로젝트 구조:
+`oh-my-cursor install` 실행 후 39개 규칙 파일이 설치됩니다:
 
 ```
-.cursor/
-  rules/
-    omc-orchestrator.mdc       ← 항상 적용
-    omc-planner.mdc
-    omc-executor.mdc
-    omc-reviewer.mdc
-    omc-debugger.mdc
-    omc-architect.mdc
-    omc-test-engineer.mdc
-    omc-security-reviewer.mdc
-    omc-autopilot.mdc
-    omc-tdd.mdc
-    omc-plan-execute.mdc
-    omc-coding-style.mdc
-    omc-testing.mdc
-    omc-security.mdc           ← 항상 적용
-    omc-git-workflow.mdc
-    omc-performance.mdc
+.cursor/rules/
+  # 글로벌 (항상 적용)
+  omc-orchestrator.mdc
+  # 에이전트 (22개 역할)
+  omc-analyst.mdc              omc-harsh-critic.mdc
+  omc-architect.mdc            omc-planner.mdc
+  omc-build-fixer.mdc          omc-qa-tester.mdc
+  omc-code-simplifier.mdc      omc-quality-reviewer.mdc
+  omc-critic.mdc               omc-reviewer.mdc
+  omc-debugger.mdc             omc-scientist.mdc
+  omc-deep-executor.mdc        omc-security-reviewer.mdc
+  omc-designer.mdc             omc-test-engineer.mdc
+  omc-document-specialist.mdc  omc-verifier.mdc
+  omc-executor.mdc             omc-writer.mdc
+  omc-explore.mdc              omc-git-master.mdc
+  # 워크플로우 (10개 패턴)
+  omc-autopilot.mdc            omc-ralph.mdc
+  omc-deep-interview.mdc       omc-ralplan.mdc
+  omc-learner.mdc              omc-release.mdc
+  omc-plan-execute.mdc         omc-slop-cleaner.mdc
+  omc-tdd.mdc                  omc-ultraqa.mdc
+  # 관행 (6개 표준)
+  omc-coding-style.mdc         omc-performance.mdc
+  omc-git-workflow.mdc         omc-security.mdc (항상 적용)
+  omc-karpathy-guidelines.mdc  omc-testing.mdc
+
 .cursorrules                   ← OMC 섹션으로 업데이트됨
 .omc-cursor/                   ← 상태 (gitignore됨)
 ```

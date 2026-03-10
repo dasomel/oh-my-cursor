@@ -185,34 +185,44 @@ oh-my-cursor uses file-based state in `.omc-cursor/` (gitignored):
 .omc-cursor/
   plans/       ← Implementation plans created by Planner role
   notepad.md   ← Session notes (survives context compression)
+  prd.json     ← PRD for Ralph workflow
   spec.md      ← Requirements from Autopilot workflow
-  state.json   ← Workflow state
+  handoffs/    ← Role transition documents
+  research/    ← Research session notes
   backups/     ← Backups of modified files
 ```
 
 ## Installed Files
 
-After `oh-my-cursor install`, your project gets:
+After `oh-my-cursor install`, your project gets 39 rule files:
 
 ```
-.cursor/
-  rules/
-    omc-orchestrator.mdc       ← Always applied
-    omc-planner.mdc
-    omc-executor.mdc
-    omc-reviewer.mdc
-    omc-debugger.mdc
-    omc-architect.mdc
-    omc-test-engineer.mdc
-    omc-security-reviewer.mdc
-    omc-autopilot.mdc
-    omc-tdd.mdc
-    omc-plan-execute.mdc
-    omc-coding-style.mdc
-    omc-testing.mdc
-    omc-security.mdc           ← Always applied
-    omc-git-workflow.mdc
-    omc-performance.mdc
+.cursor/rules/
+  # Global (always applied)
+  omc-orchestrator.mdc
+  # Agents (22 roles)
+  omc-analyst.mdc              omc-harsh-critic.mdc
+  omc-architect.mdc            omc-planner.mdc
+  omc-build-fixer.mdc          omc-qa-tester.mdc
+  omc-code-simplifier.mdc      omc-quality-reviewer.mdc
+  omc-critic.mdc               omc-reviewer.mdc
+  omc-debugger.mdc             omc-scientist.mdc
+  omc-deep-executor.mdc        omc-security-reviewer.mdc
+  omc-designer.mdc             omc-test-engineer.mdc
+  omc-document-specialist.mdc  omc-verifier.mdc
+  omc-executor.mdc             omc-writer.mdc
+  omc-explore.mdc              omc-git-master.mdc
+  # Workflows (10 patterns)
+  omc-autopilot.mdc            omc-ralph.mdc
+  omc-deep-interview.mdc       omc-ralplan.mdc
+  omc-learner.mdc              omc-release.mdc
+  omc-plan-execute.mdc         omc-slop-cleaner.mdc
+  omc-tdd.mdc                  omc-ultraqa.mdc
+  # Practices (6 standards)
+  omc-coding-style.mdc         omc-performance.mdc
+  omc-git-workflow.mdc         omc-security.mdc (always applied)
+  omc-karpathy-guidelines.mdc  omc-testing.mdc
+
 .cursorrules                   ← Updated with OMC section
 .omc-cursor/                   ← State (gitignored)
 ```
