@@ -8,6 +8,7 @@ import { createAddCommand } from './commands/add.js'
 import { createListCommand } from './commands/list.js'
 import { createRemoveCommand } from './commands/remove.js'
 import { createDoctorCommand } from './commands/doctor.js'
+import { createUpdateCommand } from './commands/update.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -34,6 +35,7 @@ async function main() {
     .addCommand(createListCommand())
     .addCommand(createRemoveCommand())
     .addCommand(createDoctorCommand())
+    .addCommand(createUpdateCommand())
 
   await program.parseAsync(process.argv)
 }
