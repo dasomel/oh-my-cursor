@@ -39,7 +39,7 @@ cd your-project
 oh-my-cursor install
 ```
 
-설치 후 Cursor를 열고 역할 기반 프롬프트를 사용하세요.
+설치 후 Cursor를 열고 역할 기반 프롬프트를 사용하세요. 자세한 예시는 [사용자 가이드](./GUIDE.ko.md)를 참고하세요.
 
 ## 에이전트 역할
 

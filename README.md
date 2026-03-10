@@ -39,7 +39,7 @@ cd your-project
 oh-my-cursor install
 ```
 
-Open Cursor and start using role-based prompts in your conversations.
+Open Cursor and start using role-based prompts in your conversations. See the [User Guide](./GUIDE.md) for detailed examples.
 
 ## Agent Roles
 
